@@ -14,7 +14,7 @@ var ES6Modules = require('broccoli-es6modules');
 var mergeTrees = require('broccoli-merge-trees');
 var funnel = require('broccoli-funnel');
 
-var workerJs = mergeTrees(['worker', 'smm/lib']);
+var workerJs = funnel(mergeTrees(['worker', 'smm/lib']), { exclude: ['main.js'] });
 
 workerJs = esTranspiler(workerJs, { blacklist: ['es6.modules', 'useStrict'] });
 
@@ -35,10 +35,11 @@ workerJs = mergeTrees([
         pattern: { match: /define\(factory\);/, replacement: 'define("BigInt",factory);' }, // hack to add module name
     }),
     funnel('bower_components/loader.js', { include: ['loader.js'] }),
+    funnel('worker', { include: ['main.js'], getDestinationPath: function () { return 'main.defer'; } }),
 ]);
 
 workerJs = app.concatFiles(workerJs, {
-    inputFiles: ['loader.js', '**/*.js'],
+    inputFiles: ['loader.js', '**/*.js', 'main.defer'],
     outputFile: '/assets/worker.js',
     allowNone: true,
     description: 'Concat: Worker JS',
