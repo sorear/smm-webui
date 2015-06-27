@@ -1,0 +1,6 @@
+[
+    { "name": "mpe", "title": "Metamath Proof Explorer", "description": "First-order classical logic and ZFC set theory.", "database_url": "https://cdn.rawgit.com/metamath/set.mm/684694e54d2260eb2430fd05787c54a58381960d/set.mm" },
+    { "name": "nf", "title": "New Foundations Explorer", "description": "First-order classical logic and New Foundations set theory.", "database_url": "https://cdn.rawgit.com/sctfn/metamath-nf/fc8c9e1835587e4059c7e24515763077c6bfb96d/nf.mm" },
+    { "name": "hol", "title": "HOL in Metamath", "description": "HOL type theory (\"Higher order logic\") in the Metamath system.", "database_url": "https://cdn.rawgit.com/metamath/set.mm/0adf749c553ad78e01c7cf44104de0a6aa37d26c/hol.mm" },
+    { "name": "intuit", "title": "Intuitionistic set theory", "description": "ZFC set theory using first-order intuitionistic logic.", "database_url": "https://cdn.rawgit.com/metamath/set.mm/21f826b309a6e9c53774e272afe582ed47b989a9/iset.mm" }
+]
