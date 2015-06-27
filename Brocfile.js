@@ -9,17 +9,39 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
 });
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 
-// Use `app.import` to add additional libraries to the generated
-// output files.
-//
-// If you need to use different assets in different
-// environments, specify an object as the first parameter. That
-// object's keys should be the environment name and the values
-// should be the asset to use in that environment.
-//
-// If the library that you are including contains AMD or ES6
-// modules that you would like to import into your application
-// please specify an object with the list of modules as keys
-// along with the exports of each module as its value.
+var esTranspiler = require('broccoli-babel-transpiler');
+var ES6Modules = require('broccoli-es6modules');
+var mergeTrees = require('broccoli-merge-trees');
+var funnel = require('broccoli-funnel');
 
-module.exports = app.toTree();
+var workerJs = mergeTrees(['worker', 'smm/lib']);
+
+workerJs = esTranspiler(workerJs, { blacklist: ['es6.modules', 'useStrict'] });
+
+workerJs = new ES6Modules(workerJs, {
+    description: 'ES6: Worker Tree',
+    esperantoOptions: {
+        absolutePaths: true,
+        strict: true,
+    },
+});
+
+var replace = require('broccoli-string-replace');
+
+workerJs = mergeTrees([
+    workerJs,
+    replace(funnel('bower_components/big-int/src', { include: ['BigInt.js'] }), {
+        files: ['BigInt.js'],
+        pattern: { match: /define\(factory\);/, replacement: 'define("BigInt",factory);' }, // hack to add module name
+    }),
+    funnel('bower_components/loader.js', { include: ['loader.js'] }),
+]);
+
+workerJs = app.concatFiles(workerJs, {
+    inputFiles: ['loader.js', '**/*.js'],
+    outputFile: '/assets/worker.js',
+    allowNone: true,
+    description: 'Concat: Worker JS',
+});
+
+module.exports = app.toTree([workerJs]);
