@@ -1,0 +1,3 @@
+[submodule "smm"]
+	path = smm
+	url = ../smm
