@@ -1,6 +1,6 @@
-{{model.database.statementCount}} statements
-<ol>
-  {{#each assertions as |a|}}
-    <li>{{a.label}}: {{a.mathText}}</li>
+{{model.database.statementCount}} statements.  {{page}}/{{pageCount}}
+<ul>
+  {{#each pageContent as |a|}}
+    <li>({{a.pinkNumber}}) {{a.label}}: {{a.mathText}}</li>
   {{/each}}
-</ol>
+</ul>
