@@ -1,1 +1,6 @@
-HELLO INDEX
+<h1>CHOOSE A DATABASE</h1>
+<ul class="directory--list">
+    {{#each model.known_databases as |entry|}}
+        <li>{{#link-to 'db' entry.name}}{{entry.title}}: {{entry.description}}{{/link-to}}</li>
+    {{/each}}
+</ul>

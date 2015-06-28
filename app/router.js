@@ -9,6 +9,8 @@ Router.map(function() {
   this.route('invalid', {
     path: '/*wildcard'
   });
+  this.route('db', { path: '/:db' }, function() {
+  });
 });
 
 export default Router;
