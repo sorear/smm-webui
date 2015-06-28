@@ -1,2 +1,6 @@
 {{model.database.statementCount}} statements
-{{outlet}}
+<ol>
+  {{#each assertions as |a|}}
+    <li>{{a.label}}: {{a.mathText}}</li>
+  {{/each}}
+</ol>

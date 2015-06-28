@@ -14,15 +14,15 @@ var ES6Modules = require('broccoli-es6modules');
 var mergeTrees = require('broccoli-merge-trees');
 var funnel = require('broccoli-funnel');
 
-var smmJs = esTranspiler('smm/lib', { blacklist: ['es6.modules', 'useStrict'] });
+var smmJs = esTranspiler('smm/lib', { blacklist: [/*'es6.modules',*/ 'useStrict'], modules: 'amdStrict', moduleId: true });
 
-smmJs = new ES6Modules(smmJs, {
+/*smmJs = new ES6Modules(smmJs, {
     description: 'ES6: SMM Tree',
     esperantoOptions: {
         absolutePaths: true,
         strict: true,
     },
-});
+});*/
 
 var replace = require('broccoli-string-replace');
 
