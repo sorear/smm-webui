@@ -1,6 +1,11 @@
-<h1>CHOOSE A DATABASE</h1>
-<ul class="directory--list">
-    {{#each model.known_databases as |entry|}}
-        <li>{{#link-to 'db' entry.name}}{{entry.title}}: {{entry.description}}{{/link-to}}</li>
-    {{/each}}
-</ul>
+<h1><i>S</i> Metamath Interface</h1>
+<h1>BROWSE A PUBLISHED DATABASE</h1>
+<div class="list-group">
+  {{#each model.known_databases as |entry|}}
+    {{#link-to 'db' entry.name class="list-group-item"}}
+      <h4 class="list-group-item-heading">{{entry.title}}</h4>
+      <p class="list-group-item-text">{{entry.description}}</p>
+    {{/link-to}}
+  {{/each}}
+</div>
+<h1>SOMETHING TO ADD?</h1>

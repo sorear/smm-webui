@@ -1,6 +1,23 @@
-<ul>
-  {{#each pageContent as |a|}}
-    <li>({{a.pinkNumber}}) {{#link-to 'db.statement' model a.statement}}{{a.label}}{{/link-to}}: {{a.mathText}}</li>
-  {{/each}}
-</ul>
 {{pagination-pager current=page count=pageCount}}
+<table class="table table-bordered">
+  <thead><tr><th>Label</th><th>Assertion</th><th>Comments</th></tr></thead>
+  <tbody>
+    {{#each pageContent as |a|}}
+      <tr>
+        {{! TODO: make a whole-row link }}
+        <td>{{#link-to 'db.statement' model a.statement}}{{a.label}} <small>{{a.pinkNumber}}</small>{{/link-to}}</td>
+        <td>
+          {{#if a.hypotheses.length}}
+            {{! TODO: Is there a better way to mark up an inference rule? }}
+            {{#each a.hypotheses as |hyp|}}<div class="statementlist--hypothesis"><code>{{hyp}}</code></div>{{/each}}
+            <hr class="statementlist--inferencebreak">
+            <div class="statementlist--assertion"><code>{{a.math}}</code></div>
+          {{else}}
+            <code>{{a.math}}</code>
+          {{/if}}
+        </td>
+        <td>{{a.commentText}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
