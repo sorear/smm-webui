@@ -10,7 +10,9 @@ Router.map(function() {
     path: '/*wildcard'
   });
   this.route('db', { path: '/:db' }, function() {
+    this.route('statement', { path: 'statement/:name' });
   });
+  this.route('template');
 });
 
 export default Router;

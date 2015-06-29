@@ -1,7 +1,7 @@
 {{model.database.statementCount}} statements.  {{page}}/{{pageCount}}
 <ul>
   {{#each pageContent as |a|}}
-    <li>({{a.pinkNumber}}) {{a.label}}: {{a.mathText}}</li>
+    <li>({{a.pinkNumber}}) {{#link-to 'db.statement' model a}}{{a.label}}{{/link-to}}: {{a.mathText}}</li>
   {{/each}}
 </ul>
 {{pagination-pager current=page count=pageCount}}
