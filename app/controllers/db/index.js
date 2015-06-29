@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   page_size: 50,
 
   _pageParams: function() {
-    let db = this.get('model').database,
+    let db = this.get('model').get('database'),
         count = db.numberer.counts[MMOMStatement.AXIOM] + db.numberer.counts[MMOMStatement.PROVABLE]; // TODO should have a maxPink
 
     let page      = this.get('page'),
@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
     page_size = (page_size === (page_size | 0) && page_size > 0) ? page_size : 1; // TODO better way to validate?
 
     return { db: db, count: count, page: page, page_size: page_size };
-  }.property('model','page','page_size'),
+  }.property('model','page','page_size'), // TODO change tracking (counts)
 
   pageContent: function() {
     let out = [], p = this.get('_pageParams');
@@ -26,7 +26,13 @@ export default Ember.Controller.extend({
     let last = Math.max(1, Math.min(p.count, p.page * p.page_size));
 
     for (let i = first; i <= last; i++) {
-      out.push(p.db.statementByPinkNumber(i));
+      let stmt = p.db.statementByPinkNumber(i);
+      out.push(Ember.Object.create({
+        pinkNumber: stmt.pinkNumber,
+        mathText: stmt.mathText,
+        statement: stmt,
+        label: stmt.label,
+      }));
     }
     return out;
   }.property('_pageParams'),
