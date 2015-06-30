@@ -2,7 +2,7 @@
 <h1>BROWSE A PUBLISHED DATABASE</h1>
 <div class="list-group">
   {{#each model.known_databases as |entry|}}
-    {{#link-to 'db' entry.name class="list-group-item"}}
+    {{#link-to 'db.list' entry.name class="list-group-item"}}
       <h4 class="list-group-item-heading">{{entry.title}}</h4>
       <p class="list-group-item-text">{{entry.description}}</p>
     {{/link-to}}
