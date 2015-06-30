@@ -2,3 +2,25 @@ hr.statementlist--inferencebreak {
   margin: 2px;
   border-color: #bbb;
 }
+
+.statementlist--hypothesis, .statementlist--assertion, .statementlist--assertiononly {
+  margin-left: 3em;
+  text-indent: -3em;
+}
+
+.statementlist--labelcol {
+  width: 20%;
+}
+
+@media (min-width: 992px) { /* TODO: use less variable */
+.statementlist--labelcol {
+  width: 10%;
+}
+
+.statementlist--assertcol {
+  width: 40%;
+}
+
+.statementlist--commentcol {
+  width: 40%;
+}
