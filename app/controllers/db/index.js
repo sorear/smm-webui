@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {MMOMStatement} from 'MMOM';
-import 'Numberer';
-import 'Scoper';
+import {MMOMStatement} from 'smm';
 
 export default Ember.Controller.extend({
   queryParams: ['page','page_size'],
@@ -29,7 +27,7 @@ export default Ember.Controller.extend({
 
     for (let i = first; i <= last; i++) {
       let stmt = p.db.statementByPinkNumber(i);
-      let prev = stmt.index > 0 ? p.db.statement(stmt.index - 1) : null; // TODO should be API
+      let prev = stmt.prev;
       let hyp  = [];
       let frame = p.db.scoper.getFrame(stmt.index); // TODO NOT API
       frame.mand.forEach(m => {
@@ -40,7 +38,7 @@ export default Ember.Controller.extend({
         pinkNumber: stmt.pinkNumber,
         math: stmt.math.join(' '),
         hypotheses: hyp,
-        commentText: (prev && prev.isComment) ? prev.commentText : 'NO COMMENT PROVIDED',
+        commentText: (prev && prev.isComment) ? prev.commentText : 'NO COMMENT PROVIDED', // TODO ignore "special comments"
         statement: stmt,
         label: stmt.label,
       }));

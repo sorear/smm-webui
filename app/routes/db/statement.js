@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import 'Scoper'; //TODO
 
 export default Ember.Route.extend({
   model(params) {

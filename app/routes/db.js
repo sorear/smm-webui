@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { parseAsync } from 'MMOM';
+import { parseAsync } from 'smm';
 
 export default Ember.Route.extend({
   model(params) {
