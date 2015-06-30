@@ -1,9 +1,9 @@
-{{pagination-pager current=page count=pageCount}}
+{{pagination-pager current=effectivePage count=pageCount}}
 <table class="table table-bordered">
   <thead><tr><th class="statementlist--labelcol">Label</th><th class="statementlist--assertcol">Assertion</th><th class="statementlist--commentcol">Comments</th></tr></thead>
   <tbody>
     {{#each pageContent as |a|}}
-      <tr>
+      <tr class={{if a.isChosen 'info'}}>
         {{! TODO: make a whole-row link }}
         <td class="statementlist--labelcol">{{#link-to 'db.statement' model a.statement}}{{a.label}} <small>{{a.pinkNumber}}</small>{{/link-to}}</td>
         <td class="statementlist--assertcol">
