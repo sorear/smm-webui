@@ -1,3 +1,3 @@
 [submodule "smm"]
 	path = smm
-	url = ../smm
+	url = git://github.com/sorear/smm
