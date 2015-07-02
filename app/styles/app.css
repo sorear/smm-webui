@@ -24,3 +24,11 @@ hr.statementlist--inferencebreak {
 .statementlist--commentcol {
   width: 40%;
 }
+
+.statementlist--table {
+  table-layout: fixed;
+}
+
+.application--footer {
+  margin-top: 10em;
+}
