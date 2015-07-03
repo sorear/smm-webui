@@ -19,6 +19,7 @@ export default Ember.Route.extend({
             url => Ember.RSVP.resolve(Ember.$.get(url)).then(text => text + atext)))
           .then(mmom => ({ name: params.db, database: mmom, title: db.title }));
       }
+      db.promise.then(x => window.MMDB = x.database); // make the database easily accessible in devtools - do not use this from smm-webui code
       return db.promise;
     }
     else {
