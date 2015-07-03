@@ -9,11 +9,11 @@
         <td class="statementlist--assertcol">
           {{#if a.hypotheses.length}}
             {{! TODO: Is there a better way to mark up an inference rule? }}
-            {{#each a.hypotheses as |hyp|}}<div class="statementlist--hypothesis"><code>{{hyp}}</code></div>{{/each}}
+            {{#each a.hypotheses as |hyp|}}<div class="statementlist--hypothesis"><code>{{math-string unparsed=hyp}}</code></div>{{/each}}
             <hr class="statementlist--inferencebreak">
-            <div class="statementlist--assertion"><code>{{a.math}}</code></div>
+            <div class="statementlist--assertion"><code>{{math-string unparsed=a.math}}</code></div>
           {{else}}
-            <div class="statementlist--assertiononly"><code>{{a.math}}</code></div>
+            <div class="statementlist--assertiononly">{{math-string unparsed=a.math}}</div>
           {{/if}}
         </td>
         <td class="statementlist--commentcol">{{a.commentText}}</td>

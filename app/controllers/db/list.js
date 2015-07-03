@@ -41,12 +41,12 @@ export default Ember.Controller.extend({
       let hyp  = [];
       let frame = p.db.scoper.getFrame(stmt.index); // TODO NOT API
       frame.mand.forEach(m => {
-        if (!m.float) { hyp.push(p.db.statement(m.stmt).math.join(' ')); }
+        if (!m.float) { hyp.push(p.db.statement(m.stmt).math); }
       });
 
       out.push(Ember.Object.create({
         pinkNumber: stmt.pinkNumber,
-        math: stmt.math.join(' '),
+        math: stmt.math,
         hypotheses: hyp,
         isChosen: stmt === p.chosen_stmt,
         commentText: (prev && prev.isComment) ? prev.commentText : 'NO COMMENT PROVIDED', // TODO ignore "special comments"
