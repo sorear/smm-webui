@@ -6,16 +6,7 @@
       <tr class={{if a.isChosen 'info'}}>
         {{! TODO: make a whole-row link }}
         <td class="statementlist--labelcol">{{#link-to 'db.statement' model a.statement}}{{a.label}} <small>{{a.pinkNumber}}</small>{{/link-to}}</td>
-        <td class="statementlist--assertcol">
-          {{#if a.hypotheses.length}}
-            {{! TODO: Is there a better way to mark up an inference rule? }}
-            {{#each a.hypotheses as |hyp|}}<div class="statementlist--hypothesis"><code>{{math-string unparsed=hyp}}</code></div>{{/each}}
-            <hr class="statementlist--inferencebreak">
-            <div class="statementlist--assertion"><code>{{math-string unparsed=a.math}}</code></div>
-          {{else}}
-            <div class="statementlist--assertiononly">{{math-string unparsed=a.math}}</div>
-          {{/if}}
-        </td>
+        <td class="statementlist--assertcol">{{inference-rule hypotheses=a.hypotheses assertion=a.math}}</td>
         <td class="statementlist--commentcol">{{a.commentText}}</td>
       </tr>
     {{/each}}

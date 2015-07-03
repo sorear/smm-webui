@@ -1,0 +1,8 @@
+{{#if hypotheses.length}}
+  {{! TODO: Is there a better way to mark up an inference rule? }}
+  {{#each hypotheses as |hyp|}}<div class="inference-rule--hypothesis">{{math-string unparsed=hyp}}</div>{{/each}}
+  <hr class="inference-rule--inferencebreak">
+  <div class="inference-rule--assertion">{{math-string unparsed=assertion}}</div>
+{{else}}
+  <div class="inference-rule--assertiononly">{{math-string unparsed=assertion}}</div>
+{{/if}}

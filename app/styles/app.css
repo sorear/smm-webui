@@ -1,9 +1,9 @@
-hr.statementlist--inferencebreak {
+hr.inference-rule--inferencebreak {
   margin: 2px;
   border-color: #bbb;
 }
 
-.statementlist--hypothesis, .statementlist--assertion, .statementlist--assertiononly {
+.inference-rule--hypothesis, .inference-rule--assertion, .inference-rule--assertiononly {
   margin-left: 3em;
   text-indent: -3em;
 }
