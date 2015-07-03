@@ -19,6 +19,10 @@ hr.inference-rule--inferencebreak {
   border-radius: 4px;
 }
 
+.math-string--subexp--clicked {
+  background-color: #d0d0d0;
+}
+
 /* suppress Bootstrap code styling since we want it on the inline-block wrapper */
 .inference-rule--container code {
   padding: 0px;

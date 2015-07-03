@@ -4,25 +4,29 @@
       "name": "mpe",
       "title": "Metamath Proof Explorer",
       "description": "Thousands of theorems of general mathemetics developed on top of first-order classical logic and Zermelo-Fraenkel set theory axioms.",
-      "database_url": "https://cdn.rawgit.com/metamath/set.mm/684694e54d2260eb2430fd05787c54a58381960d/set.mm"
+      "database_url": "https://cdn.rawgit.com/metamath/set.mm/684694e54d2260eb2430fd05787c54a58381960d/set.mm",
+      "affix_url": "assets/set-config.mm"
     },
     {
       "name": "nf",
       "title": "New Foundations Explorer",
       "description": "Quine's heterodox New Foundations theory, where the set of all sets is itself a set.  Recently proved consistent, but has many strange properties.",
-      "database_url": "https://cdn.rawgit.com/sctfn/metamath-nf/fc8c9e1835587e4059c7e24515763077c6bfb96d/nf.mm"
+      "database_url": "https://cdn.rawgit.com/sctfn/metamath-nf/fc8c9e1835587e4059c7e24515763077c6bfb96d/nf.mm",
+      "affix_url": "assets/set-config.mm"
     },
     {
       "name": "hol",
       "title": "HOL in Metamath",
       "description": "An embedding of the HOL (\"Higher order logic\") type theory, used by several other systems, in the Metamath system.",
-      "database_url": "https://cdn.rawgit.com/metamath/set.mm/0adf749c553ad78e01c7cf44104de0a6aa37d26c/hol.mm"
+      "database_url": "https://cdn.rawgit.com/metamath/set.mm/0adf749c553ad78e01c7cf44104de0a6aa37d26c/hol.mm",
+      "affix_url": "assets/hol-config.mm"
     },
     {
       "name": "intuit",
       "title": "Intuitionistic set theory",
       "description": "A version of the Metamath Proof Explorer using intuitionistic logic, where X OR Y can only be proven if there is some procedure for determining which one.",
-      "database_url": "https://cdn.rawgit.com/metamath/set.mm/21f826b309a6e9c53774e272afe582ed47b989a9/iset.mm"
+      "database_url": "https://cdn.rawgit.com/metamath/set.mm/21f826b309a6e9c53774e272afe582ed47b989a9/iset.mm",
+      "affix_url": "assets/set-config.mm"
     }
   ]
 }
