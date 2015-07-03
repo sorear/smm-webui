@@ -17,6 +17,19 @@
           <p class="navbar-text">No database selected</p>
         {{/if}}
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {{#if databaseModel}}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Math display <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {{dropdown-item name="GIFs" value="htmldef" current=prefs.mathDisplay}}
+              {{dropdown-item name="Unicode symbols" value="althtmldef" current=prefs.mathDisplay}}
+              {{dropdown-item name="LaTeX output" value="latexdef" current=prefs.mathDisplay}}
+              {{dropdown-item name="Source (ASCII)" value="source" current=prefs.mathDisplay}}
+            </ul>
+          </li>
+        {{/if}}
+      </ul>
     </div>
   </div>
 </nav>
