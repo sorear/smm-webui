@@ -9,6 +9,7 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
 });
 app.import('vendor/core.js/custom.js');
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
+app.import('bower_components/dompurify/purify.js');
 
 var esTranspiler = require('broccoli-babel-transpiler');
 var ES6Modules = require('broccoli-es6modules');
