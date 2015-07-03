@@ -1,11 +1,29 @@
 hr.inference-rule--inferencebreak {
-  margin: 2px;
   border-color: #bbb;
+  margin: 2px 8px 2px 8px;
+}
+
+.inference-rule--container {
+  display: inline-block;
+  text-align: center;
+  margin: 0px -8px 0px -8px;
 }
 
 .inference-rule--hypothesis, .inference-rule--assertion, .inference-rule--assertiononly {
-  margin-left: 3em;
-  text-indent: -3em;
+  display: inline-block;
+  margin: 1px 8px 1px 8px;
+  text-align: left;
+  background-color: #f7f7f7;
+  padding: 0 2px 0 22px;
+  text-indent: -20px;
+  border-radius: 4px;
+}
+
+/* suppress Bootstrap code styling since we want it on the inline-block wrapper */
+.inference-rule--container code {
+  padding: 0px;
+  color: #333;
+  background-color: initial;
 }
 
 .statementlist--labelcol {
@@ -16,9 +34,11 @@ hr.inference-rule--inferencebreak {
 .statementlist--labelcol {
   width: 10%;
 }
+}
 
 .statementlist--assertcol {
   width: 40%;
+  text-align: center;
 }
 
 .statementlist--commentcol {
