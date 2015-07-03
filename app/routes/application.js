@@ -15,6 +15,6 @@ export default Ember.Route.extend({
     getContextualNav() { return true; }, // the buck stops here
   },
   model() {
-    return Ember.$.getJSON('/directory.json');
+    return Ember.$.getJSON('assets/directory.json');
   }
 });
