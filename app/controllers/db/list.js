@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['page','page_size','go'],
+  queryParams: ['page','page_size','go','node'],
   page: 1,
   page_size: 20,
   go: null, // TODO: error messaging, scroll-on-nav (fiddly as both 'didTransition' and 'activate' are too early)
+  node: null,
 
   _pageParams: function() {
     let db = this.get('model').database, count = db.assertionCount;
@@ -12,6 +13,7 @@ export default Ember.Controller.extend({
     let page        = this.get('page'),
         page_size   = this.get('page_size'),
         chosen      = this.get('go'),
+        chosen_slug = this.get('node'),
         chosen_sym  = chosen && db.scoper.lookup(chosen),
         chosen_stmt;
 
@@ -24,8 +26,20 @@ export default Ember.Controller.extend({
       page = 1 + Math.floor((chosen_stmt.pinkNumber - 1) / page_size);
     }
 
+    if (chosen_slug) {
+      let node = db.outlineNodes.filter(n => n.slug === chosen_slug)[0];
+      chosen_stmt = node.statement;
+      while (chosen_stmt && !chosen_stmt.isAssertion) {
+        chosen_stmt = chosen_stmt.next;
+      }
+      if (!chosen_stmt) {
+        chosen_stmt = db.assertionCount > 0 ? db.statementByPinkNumber(db.assertionCount) : null;
+      }
+      page = chosen_stmt ? 1 + Math.floor((chosen_stmt.pinkNumber - 1) / page_size) : 1;
+    }
+
     return { db: db, count: count, page: page, page_size: page_size, chosen_stmt: chosen_stmt };
-  }.property('model','go','page','page_size'), // TODO change tracking (counts)
+  }.property('model','go','page','page_size','node'), // TODO change tracking (counts)
 
   activeStatement: Ember.computed('_pageParams', function() { return this.get('_pageParams').chosen_stmt; }),
 
@@ -33,9 +47,34 @@ export default Ember.Controller.extend({
     let out = [], p = this.get('_pageParams');
     let first = Math.max(1, Math.min(p.count, 1 + (p.page - 1) * p.page_size));
     let last = Math.max(1, Math.min(p.count, p.page * p.page_size));
+    let run = [];
 
     for (let i = first; i <= last; i++) {
-      out.push(p.db.statementByPinkNumber(i));
+      let stmt = p.db.statementByPinkNumber(i);
+      let prev_asn_index = i === 1 ? -1 : p.db.statementByPinkNumber(i-1).index;
+
+      let headers_skipped = [];
+      for (let node = stmt.outlineNode;
+          node && !node.path.filter(n => n.ordinal === 0).length && node.statement.index > prev_asn_index;
+          node = node.statement.prev.outlineNode) {
+        headers_skipped.push(node);
+      }
+
+      if (headers_skipped.length) {
+        if (run.length) {
+          out.push({ statements: run });
+          run = [];
+        }
+        while (headers_skipped.length) {
+          let hdr = headers_skipped.pop();
+          out.push({ outlineNode: hdr });
+        }
+      }
+      run.push(stmt);
+    }
+    if (run.length) {
+      out.push({ statements: run });
+      run = [];
     }
     return out;
   }.property('_pageParams'),
@@ -45,11 +84,11 @@ export default Ember.Controller.extend({
     return Math.ceil(p.count / p.page_size);
   }.property('_pageParams'),
 
-  effectivePage: function(name, value) {
-    if (arguments.length > 1) {
-      // setting page clears go
-      this.setProperties({ page: value, go: null });
+  effectivePage: Ember.computed('_pageParams', {
+    get() { return this.get('_pageParams').page; },
+    set(name, value) {
+      this.setProperties({ page: value, node: null, go: null });
+      return value;
     }
-    return this.get('_pageParams').page;
-  }.property('_pageParams'),
+  }),
 });
