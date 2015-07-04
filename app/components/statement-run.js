@@ -32,4 +32,10 @@ export default Ember.Component.extend({
     }
     return out;
   }),
+
+  didInsertElement() {
+    Ember.run.scheduleOnce('afterRender', this, function(){
+      Ember.$('.statementlist--row--chosen').each(function() { this.scrollIntoView(true); });
+    });
+  },
 });

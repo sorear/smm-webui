@@ -2,7 +2,7 @@
   <thead><tr><th class="statementlist--labelcol">Label</th><th class="statementlist--assertcol">Assertion</th><th class="statementlist--commentcol">Comments</th></tr></thead>
   <tbody>
     {{#each statementsData as |a|}}
-      <tr class={{if a.isChosen 'info'}}>
+      <tr class={{if a.isChosen 'info statementlist--row--chosen'}}>
         {{! TODO: make a whole-row link }}
         <td class="statementlist--labelcol">{{#link-to 'db.statement' model a.statement}}{{a.label}} <small>{{a.pinkNumber}}</small>{{/link-to}}</td>
         <td class="statementlist--assertcol">{{inference-rule hypotheses=a.hypotheses assertion=a.statement}}</td>
