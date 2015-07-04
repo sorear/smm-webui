@@ -27,29 +27,15 @@ export default Ember.Controller.extend({
     return { db: db, count: count, page: page, page_size: page_size, chosen_stmt: chosen_stmt };
   }.property('model','go','page','page_size'), // TODO change tracking (counts)
 
+  activeStatement: Ember.computed('_pageParams', function() { return this.get('_pageParams').chosen_stmt; }),
+
   pageContent: function() {
     let out = [], p = this.get('_pageParams');
     let first = Math.max(1, Math.min(p.count, 1 + (p.page - 1) * p.page_size));
     let last = Math.max(1, Math.min(p.count, p.page * p.page_size));
-    p.db.scoper._update(); // TODO REALLY NOT API
 
     for (let i = first; i <= last; i++) {
-      let stmt = p.db.statementByPinkNumber(i);
-      let prev = stmt.prev;
-      let hyp  = [];
-      let frame = p.db.scoper.getFrame(stmt.index); // TODO NOT API
-      frame.mand.forEach(m => {
-        if (!m.float) { hyp.push(p.db.statement(m.stmt)); }
-      });
-
-      out.push(Ember.Object.create({
-        pinkNumber: stmt.pinkNumber,
-        hypotheses: hyp,
-        isChosen: stmt === p.chosen_stmt,
-        commentText: (prev && prev.isComment) ? prev.commentText : 'NO COMMENT PROVIDED', // TODO ignore "special comments"
-        statement: stmt,
-        label: stmt.label,
-      }));
+      out.push(p.db.statementByPinkNumber(i));
     }
     return out;
   }.property('_pageParams'),
