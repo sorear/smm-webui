@@ -36,4 +36,9 @@ app.trees.vendor = app.concatFiles(smmJs, {
 });
 app.legacyFilesToAppend.push('vendor/smm.js');
 
-module.exports = app.toTree();
+var symbols = funnel('bower_components/nm-metamath-symbols/symbols', { srcDir: '/', destDir: '/assets/symbols' });
+symbols.description = 'symbols funnel';
+
+module.exports = mergeTrees([app.toTree(), symbols]);
+// do this at the absolute end to minimize the number of stages that are slowed down
+module.exports.description = 'symbols merger';

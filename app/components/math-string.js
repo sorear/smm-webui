@@ -17,6 +17,7 @@ export default Ember.Component.extend({
       blob = (stmt.math || []).map(sym => this._tokenDef(sym)).join('');
     }
 
+    blob = blob.replace(/[_a-zA-Z0-9]+.gif/g,'assets/symbols/$&');
     if (mode !== 'htmldef' && mode !== 'althtmldef') blob = `<code>${blob}</code>`;
     return Ember.String.htmlSafe(blob);
   }),
