@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  properties: ['node'],
+  properties: ['node','continued'],
   title: Ember.computed('node', function() {
     return this.get('node').title;
   }),

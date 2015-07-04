@@ -1,8 +1,10 @@
 {{#if level1}}
-  <h2>{{numberPath}}: {{title}}</h2>
+  <h2 class="statement-list-subheading--header">§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page)</small>{{/if}}</h2>
 {{else if level2}}
-  <h3>{{numberPath}}: {{title}}</h3>
+  <h3 class="statement-list-subheading--header">§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page)</small>{{/if}}</h3>
 {{else}}
-  <h4>{{numberPath}}: {{title}}</h4>
+  <h4 class="statement-list-subheading--header">§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page)</small>{{/if}}</h4>
 {{/if}}
-<p>{{prologue}}</p>
+{{#unless continued}}
+  <p>{{prologue}}</p>
+{{/unless}}

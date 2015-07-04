@@ -26,9 +26,9 @@ export default Ember.Controller.extend({
       page = 1 + Math.floor((chosen_stmt.pinkNumber - 1) / page_size);
     }
 
-    if (chosen_slug) {
-      let node = db.outlineNodes.filter(n => n.slug === chosen_slug)[0];
-      chosen_stmt = node.statement;
+    let chosen_node = chosen_slug && db.outlineNodes.filter(n => n.slug === chosen_slug)[0];
+    if (chosen_node) {
+      chosen_stmt = chosen_node.statement;
       while (chosen_stmt && !chosen_stmt.isAssertion) {
         chosen_stmt = chosen_stmt.next;
       }
@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
       let headers_skipped = [];
       for (let node = stmt.outlineNode;
           node && !node.path.filter(n => n.ordinal === 0).length && node.statement.index > prev_asn_index;
-          node = node.statement.prev.outlineNode) {
+          node = node.statement.prev && node.statement.prev.outlineNode) {
         headers_skipped.push(node);
       }
 
@@ -70,6 +70,17 @@ export default Ember.Controller.extend({
           out.push({ outlineNode: hdr });
         }
       }
+      else if (i === first) {
+        // find the last (real) header.  May have to go back a way
+        let node = stmt.outlineNode;
+        while (node && node.path.filter(n => n.ordinal === 0).length) {
+          node = node.statement.prev && node.statement.prev.outlineNode;
+        }
+        if (node) {
+          out.push({ outlineNode: node, continued: true });
+        }
+      }
+
       run.push(stmt);
     }
     if (run.length) {

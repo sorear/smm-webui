@@ -60,3 +60,7 @@ hr.inference-rule--inferencebreak {
 .application--footer {
   margin-top: 10em;
 }
+
+.statement-list-subheading--header {
+  margin-top: 50px;
+}
