@@ -17,7 +17,7 @@ export default Ember.Component.extend({
       blob = (stmt.math || []).map(sym => this._tokenDef(sym)).join('');
     }
 
-    blob = blob.replace(/[_a-zA-Z0-9]+.gif/g,'assets/symbols/$&');
+    blob = blob.replace(/[_a-zA-Z0-9]+.gif/g,this.BASE_URL+'/$&');
     if (mode !== 'htmldef' && mode !== 'althtmldef') blob = `<code>${blob}</code>`;
     return Ember.String.htmlSafe(blob);
   }),
@@ -61,4 +61,6 @@ export default Ember.Component.extend({
     ALLOWED_ATTR: ['alt','title','src','align','width','height','color','size','style','class'],
     ALLOW_DATA_ATTR: false,
   },
+
+  BASE_URL: 'https://cdn.rawgit.com/sorear/nm-metamath-symbols/0.0.4/symbols',
 });

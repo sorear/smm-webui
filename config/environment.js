@@ -20,6 +20,7 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'child-src': "'self'",
+      'img-src': "'self' https://cdn.rawgit.com",
       'connect-src': "'self' https://cdn.rawgit.com",
     },
   };
