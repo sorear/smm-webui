@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   properties: ['statements', 'highlight'],
+  pageSize: Ember.inject.service(),
+  isNarrow: Ember.computed('pageSize.width', function() { return this.get('pageSize.width') < 768; }), // match bootstrap point where the navbar poofs
 
   statementsData: Ember.computed('statements', 'highlight', function () {
     let out = [];

@@ -53,6 +53,10 @@ hr.inference-rule--inferencebreak {
   table-layout: fixed;
 }
 
+.statementlist--assertbox {
+  text-align: center;
+}
+
 .application--footer {
   margin-top: 10em;
 }
