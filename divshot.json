@@ -1,0 +1,15 @@
+{
+  "name": "smm",
+  "root": "./dist",
+  "routes": {
+    "/tests": "tests/index.html",
+    "/tests/**": "tests/index.html",
+    "/**": "index.html"
+  },
+  "headers": {
+    "/**": {
+      "Content-Security-Policy": "child-src 'self'; img-src 'self' https://cdn.rawgit.com; connect-src 'self' https://cdn.rawgit.com; default-src 'none'; script-src 'self' 'unsafe-eval'; font-src 'self'; style-src 'self'; media-src 'self';",
+      "X-Content-Security-Policy": "child-src 'self'; img-src 'self' https://cdn.rawgit.com; connect-src 'self' https://cdn.rawgit.com; default-src 'none'; script-src 'self' 'unsafe-eval'; font-src 'self'; style-src 'self'; media-src 'self';"
+    }
+  }
+}
