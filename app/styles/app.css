@@ -68,3 +68,13 @@ hr.inference-rule--inferencebreak {
   color: #a00;
   border-bottom: 1px solid;
 }
+
+.statement-list-subheading--micronav-header {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.statement-list-subheading--micronav-item {
+  display: inline-block;
+  margin-right: 10px;
+}

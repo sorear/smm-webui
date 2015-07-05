@@ -6,5 +6,14 @@
   <h4 class={{if chosen "statement-list-subheading--header statement-list-subheading--header--chosen" "statement-list-subheading--header"}}>§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page. {{link-to "Top." "db.list" model (query-params node=slug page=1 go="")}})</small>{{/if}}</h4>
 {{/if}}
 {{#unless continued}}
+  <div class="statement-list-subheading--micronav">
+    {{#if prev}}<span class="statement-list-subheading--micronav-item"><span class="statement-list-subheading--micronav-header">Previous</span>{{link-to prev.title 'db.list' model (query-params node=prev.slug page=1 go="")}}</span>{{/if}}
+    {{#if up}}<span class="statement-list-subheading--micronav-item"><span class="statement-list-subheading--micronav-header">Parent</span>{{link-to up.title 'db.list' model (query-params node=up.slug page=1 go="")}}</span>{{/if}}
+    {{#if next}}<span class="statement-list-subheading--micronav-item"><span class="statement-list-subheading--micronav-header">Next</span>{{link-to next.title 'db.list' model (query-params node=next.slug page=1 go="")}}</span>{{/if}}
+  </div>
   <p>{{prologue}}</p>
+  {{#if children}}
+    <div class="statement-list-subheading--children-header">Contents:</div>
+    {{outline-menu dbwrap=model depthLimit=1 outlineNodes=children classNames="statement-list-subheading--children"}}
+  {{/if}}
 {{/unless}}
