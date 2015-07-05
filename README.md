@@ -1,6 +1,6 @@
 # Smm-webui
 
-smm webapp.
+A Metamath database visualizer built on the smm library.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Not currently deployable
+* `ember divshot push`
 
 ## Further Reading / Useful Links
 
