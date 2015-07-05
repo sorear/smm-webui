@@ -1,7 +1,7 @@
 {{pagination-pager current=effectivePage count=pageCount}}
 {{#each pageContent as |run|}}
   {{#if run.statements}}
-    {{statement-run statements=run.statements highlight=activeStatement}}
+    {{statement-run statements=run.statements highlight=activeStatement model=model}}
   {{else}}
     {{statement-list-subheading node=run.outlineNode continued=run.continued model=model chosen=run.chosen}}
   {{/if}}
