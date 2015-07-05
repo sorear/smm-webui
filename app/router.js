@@ -11,9 +11,10 @@ Router.map(function() {
   });
   this.route('db', { path: '/:db' }, function() {
     this.route('list');
+    this.route('toc');
+    this.route('fulltoc');
     this.route('statement', { path: 'statement/:name' });
   });
-  this.route('template');
 });
 
 export default Router;

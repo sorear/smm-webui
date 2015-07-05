@@ -12,7 +12,14 @@
     <div class="collapse navbar-collapse smm-navbar">
       <ul class="nav navbar-nav">
         {{#if databaseModel}}
-          <li class="active">{{link-to databaseModel.title 'db.list' databaseModel}}</li>
+          <li class="active dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{databaseModel.title}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class={{if isStatementList 'active'}}>{{link-to 'Statement List' 'db.list' databaseModel}}</li>
+              {{#if hasToc}}<li class={{if isContents 'active'}}>{{link-to 'Table of Contents' 'db.toc' databaseModel}}</li>{{/if}}
+              {{#if hasDeepToc}}<li class={{if isFullContents 'active'}}>{{link-to 'Table of Contents (Detailed)' 'db.fulltoc' databaseModel}}</li>{{/if}}
+            </ul>
+          </li>
         {{else}}
           <p class="navbar-text">No database selected</p>
         {{/if}}

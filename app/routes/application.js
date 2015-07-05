@@ -6,8 +6,9 @@ export default Ember.Route.extend({
     // TODO: I'm pretty sure this is a giant race.  Unsure what to do instead
     didTransition() {
       let info = {
-        databaseModel: null,
-        statement: null,
+        databaseModel: null, statement: null,
+        isContents: false, isFullContents: false, isStatementList: false,
+        hasToc: false, hasDeepToc: false,
       };
       this.send('getContextualNav',info);
       this.get('controller').setProperties(info);

@@ -5,6 +5,8 @@ export default Ember.Route.extend({
   actions: {
     getContextualNav(e) {
       e.databaseModel = this.get('controller').get('model');
+      e.hasToc = !!e.databaseModel.database.outlineRoots.length;
+      e.hasDeepToc = e.databaseModel.database.outlineLevelsUsed > 2;
       return true;
     },
   },
