@@ -1,6 +1,6 @@
 # Smm-webui
 
-A Metamath database visualizer built on the smm library.
+A Metamath database visualizer built on the smm library.  See http://smm.divshot.io for a live instance.
 
 ## Prerequisites
 
