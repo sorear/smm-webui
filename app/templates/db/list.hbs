@@ -3,6 +3,6 @@
   {{#if run.statements}}
     {{statement-run statements=run.statements highlight=activeStatement}}
   {{else}}
-    {{statement-list-subheading node=run.outlineNode continued=run.continued}}
+    {{statement-list-subheading node=run.outlineNode continued=run.continued model=model chosen=run.chosen}}
   {{/if}}
 {{/each}}

@@ -1,9 +1,9 @@
 {{#if level1}}
-  <h2 class="statement-list-subheading--header">§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page)</small>{{/if}}</h2>
+  <h2 class={{if chosen "statement-list-subheading--header statement-list-subheading--header--chosen" "statement-list-subheading--header"}}>§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page. {{link-to "Top." "db.list" model (query-params node=slug page=1 go="")}})</small>{{/if}}</h2>
 {{else if level2}}
-  <h3 class="statement-list-subheading--header">§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page)</small>{{/if}}</h3>
+  <h3 class={{if chosen "statement-list-subheading--header statement-list-subheading--header--chosen" "statement-list-subheading--header"}}>§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page. {{link-to "Top." "db.list" model (query-params node=slug page=1 go="")}})</small>{{/if}}</h3>
 {{else}}
-  <h4 class="statement-list-subheading--header">§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page)</small>{{/if}}</h4>
+  <h4 class={{if chosen "statement-list-subheading--header statement-list-subheading--header--chosen" "statement-list-subheading--header"}}>§{{numberPath}}: {{title}} {{#if continued}}<small>(Continued from previous page. {{link-to "Top." "db.list" model (query-params node=slug page=1 go="")}})</small>{{/if}}</h4>
 {{/if}}
 {{#unless continued}}
   <p>{{prologue}}</p>

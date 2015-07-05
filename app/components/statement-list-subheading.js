@@ -5,6 +5,9 @@ export default Ember.Component.extend({
   title: Ember.computed('node', function() {
     return this.get('node').title;
   }),
+  slug: Ember.computed('node', function() {
+    return this.get('node').slug;
+  }),
   prologue: Ember.computed('node', function() {
     return this.get('node').prologue;
   }),
@@ -17,4 +20,9 @@ export default Ember.Component.extend({
   numberPath: Ember.computed('node', function() {
     return this.get('node').path.map(n => n.ordinal).join('.');
   }),
+  didInsertElement() {
+    Ember.run.scheduleOnce('afterRender', this, function(){
+      Ember.$('.statement-list-subheading--header--chosen').each(function() { this.scrollIntoView(true); });
+    });
+  },
 });

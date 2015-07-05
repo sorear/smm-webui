@@ -4,8 +4,8 @@ export default Ember.Controller.extend({
   queryParams: ['page','page_size','go','node'],
   page: 1,
   page_size: 20,
-  go: null, // TODO: error messaging, scroll-on-nav (fiddly as both 'didTransition' and 'activate' are too early)
-  node: null,
+  go: '', // TODO: error messaging, scroll-on-nav (fiddly as both 'didTransition' and 'activate' are too early)
+  node: '',
 
   _pageParams: function() {
     let db = this.get('model').database, count = db.assertionCount;
@@ -28,17 +28,18 @@ export default Ember.Controller.extend({
 
     let chosen_node = chosen_slug && db.outlineNodes.filter(n => n.slug === chosen_slug)[0];
     if (chosen_node) {
-      chosen_stmt = chosen_node.statement;
-      while (chosen_stmt && !chosen_stmt.isAssertion) {
-        chosen_stmt = chosen_stmt.next;
+      let owning_stmt = chosen_node.statement;
+      while (owning_stmt && !owning_stmt.isAssertion) {
+        owning_stmt = owning_stmt.next;
       }
-      if (!chosen_stmt) {
-        chosen_stmt = db.assertionCount > 0 ? db.statementByPinkNumber(db.assertionCount) : null;
+      if (!owning_stmt) {
+        owning_stmt = db.assertionCount > 0 ? db.statementByPinkNumber(db.assertionCount) : null;
       }
-      page = chosen_stmt ? 1 + Math.floor((chosen_stmt.pinkNumber - 1) / page_size) : 1;
+      page = owning_stmt ? 1 + Math.floor((owning_stmt.pinkNumber - 1) / page_size) : 1;
+      chosen_stmt = null;
     }
 
-    return { db: db, count: count, page: page, page_size: page_size, chosen_stmt: chosen_stmt };
+    return { db: db, count: count, page: page, page_size: page_size, chosen_stmt: chosen_stmt, chosen_node: chosen_node };
   }.property('model','go','page','page_size','node'), // TODO change tracking (counts)
 
   activeStatement: Ember.computed('_pageParams', function() { return this.get('_pageParams').chosen_stmt; }),
@@ -67,7 +68,7 @@ export default Ember.Controller.extend({
         }
         while (headers_skipped.length) {
           let hdr = headers_skipped.pop();
-          out.push({ outlineNode: hdr });
+          out.push({ outlineNode: hdr, chosen: hdr === p.chosen_node });
         }
       }
       else if (i === first) {
@@ -98,7 +99,7 @@ export default Ember.Controller.extend({
   effectivePage: Ember.computed('_pageParams', {
     get() { return this.get('_pageParams').page; },
     set(name, value) {
-      this.setProperties({ page: value, node: null, go: null });
+      this.setProperties({ page: value, node: '', go: '' });
       return value;
     }
   }),
