@@ -13,7 +13,9 @@
   </div>
   <p>{{prologue}}</p>
   {{#if children}}
-    <div class="statement-list-subheading--children-header">Contents:</div>
-    {{outline-menu dbwrap=model depthLimit=1 outlineNodes=children classNames="statement-list-subheading--children"}}
+    <div class="statement-list-subheading--children-wrap">
+      <h5>Contents:</h5>
+      {{outline-menu dbwrap=model depthLimit=1 outlineNodes=children classNames="statement-list-subheading--children"}}
+    </div>
   {{/if}}
 {{/unless}}

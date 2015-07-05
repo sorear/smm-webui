@@ -78,3 +78,21 @@ hr.inference-rule--inferencebreak {
   display: inline-block;
   margin-right: 10px;
 }
+
+.statement-list-subheading--children-wrap {
+  text-align: center;
+}
+
+.statement-list-subheading--children {
+  text-align: initial;
+  display: inline-block;
+}
+
+.outline-menu--list {
+  list-style: none;
+  padding-left: 40px;
+}
+
+li.outline-menu--item > a {
+  margin-left: -40px;
+}
