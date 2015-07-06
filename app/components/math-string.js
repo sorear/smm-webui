@@ -22,12 +22,20 @@ export default Ember.Component.extend({
     return Ember.String.htmlSafe(blob);
   }),
 
+  doubleClick(e) { e.preventDefault(); },
+  mouseDown(e) {
+    // Prevent double-click to select on Chrome but allow drag
+    if (e.originalEvent.detail > 1) {
+      e.preventDefault();
+    }
+  },
+
   click(e) {
     let clicks = e.originalEvent.detail || 1;
     let tgt = e.target && Ember.$(e.target).closest('.math-string--subexp');
     while (clicks > 1) {
       let up = tgt && tgt.parent().closest('.math-string--subexp');
-      if (!up) { break; }
+      if (!up.length) { break; }
       tgt = up;
       clicks--;
     }
