@@ -23,10 +23,18 @@ export default Ember.Component.extend({
   }),
 
   click(e) {
+    let clicks = e.originalEvent.detail || 1;
     let tgt = e.target && Ember.$(e.target).closest('.math-string--subexp');
+    while (clicks > 1) {
+      let up = tgt && tgt.parent().closest('.math-string--subexp');
+      if (!up) { break; }
+      tgt = up;
+      clicks--;
+    }
     if (tgt) {
       Ember.$('.'+CLICK_CLASS).removeClass(CLICK_CLASS);
       tgt.addClass(CLICK_CLASS);
+      e.preventDefault();
     }
   },
 
