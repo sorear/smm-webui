@@ -7,11 +7,6 @@ export default Ember.Component.extend({
   depthLimit: 99,
   dbwrap: null,
 
-  _truncatify(text) {
-    if (text.length <= 200) return text;
-    return text.slice(0,200).replace(/[^ \t\r\n]+$/,'') + ' …';
-  },
-
   children: Ember.computed('depthLimit', 'outlineNodes', function() {
     let reduced = this.get('depthLimit') - 1;
     if (reduced < 0) { return []; }
@@ -20,7 +15,6 @@ export default Ember.Component.extend({
       Ember.Object.create({
         node: ch, depthLimit: reduced, children: (reduced && ch.children.length) ? ch.children : null,
         slug: ch.slug, title: ch.title, indices: ch.path.map(x => x.ordinal).join('.'),
-        prologue: this._truncatify(ch.prologue),
       }));
   }),
 });

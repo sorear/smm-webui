@@ -3,7 +3,6 @@
     {{#link-to 'db.list' dbwrap (query-params node=ch.slug)}}
       §{{ch.indices}} {{ch.title}}
     {{/link-to}}
-    {{#if ch.prologue}}<p>{{ch.prologue}}</p>{{/if}}
     {{#if ch.children}}
       {{outline-menu dbwrap=dbwrap depthLimit=ch.depthLimit outlineNodes=ch.children}}
     {{/if}}
