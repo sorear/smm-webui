@@ -1,0 +1,77 @@
+<h1 class="page-header">Using the Search Language</h1>
+
+<p>
+  The SMM search function allows finding theorems and axioms relevant to specific conditions.
+  There is no scoring; a statement either matches or doesn't, and matching statements are returned in database order.
+</p>
+
+<h2>Simple Searches</h2>
+
+<!--
+  keyword:pattern
+  pattern may be quoted with [ ], [[ ]] (etc) or «»; required if empty or contains whitespace
+  keyword may be omitted/inferred in some cases (TBD)
+
+  comment:[Hellinger Toeplitz]    Search for words (normalized search-engine style, may be indexed); probably also includes label/math
+  comment_math:[2 + 2]            Search ` ` sections in comments
+  comment_label:foo               Search ~ sections
+
+  label:*4*                       fnmatch pattern on the label
+
+  is:axiom
+  is:theorem      Classifiers.
+  is:definition   Maybe short for is:axiom label:df-*
+  is:syntax       Maybe means is:axiom + syntactic typecode
+
+  Numeric keywords, can use comparison operators, : can be dropped
+
+  proofsize>300   require > 300 char proof (fast, requires no parsing)
+  section:9.1.2
+  section>9.1.2   TBD
+
+  variables>20
+  hypcount>10       $e
+  totalhypcount>40  $e+$f
+  uses>3
+
+  math: [X e. ( Y " Z )]    Search for subexpressions anywhere in the frame
+  math: [Xe.(Y"Z)]          Omit whitespace whenever unambiguous (until Xe, etc are defined)
+  math: [X! e. Y!]          ! forbids variable renaming
+  math: [«X!» e. Y]         Inner quote causes the ! to be literal
+  math: [X? e. ( Y? " Z? )] ? turns variable into a unification point
+  math: [^X? = Y?]          Leading ^ forces whole-statemenrt match
+
+  assert:       Like math: but only for the assertion ($a/$p)
+  hypothesis:   Like math: but only for the $e
+
+  mathstring:[ = 2 ]  For when you don't care about parsing
+  assertstring:, hypothesisstring: ditto
+
+  mathregex:[ =.*= ]  For when you *really* don't care
+
+  step: [X? Isom _E,_E (On,Y?)]   Search proof steps (slow!)
+
+  provedin:as-zfnorep   Only theorems provable from a specific axiom set
+
+  usedby:foo, iusedby:foo   Search (indirect) traceback of a theorem
+  provedusing:foo, iprovedusing:foo   Search (indirect) usage of a theorem
+-->
+
+<h2>Compound Searches</h2>
+
+<!--
+  search1 search2 (implicit AND, lowest precedence)
+  search1 OR search2
+  NOT search1
+  (search1 search2) OR search3
+
+  iusedby:sbth iprovedusing:ax-rep
+-->
+
+<h2>Directives</h2>
+
+<!--
+  Not actually filters, but affect them.  Must be at top level, unless they make sense scoped
+
+  fold:no     Turn off collapsing of substitution hypotheses
+-->
